@@ -17,9 +17,9 @@ opt.scrolloff = 24
 o.ttyfast = true
 o.wrap = false
 opt.mouse = 'a'
-vim.cmd 'set guicursor=i:ver25'
+vim.cmd 'set guicursor=i:ver25,i:blinkon1'
 o.guitablabel = '%t'
--- o.noswapfile = true
+-- o.swapfile = true
 -- o.nobackup = true
 -- ctrl + w + o == close all windows except one 
 -- ctrl + w + H == verticle to horizontal split 
