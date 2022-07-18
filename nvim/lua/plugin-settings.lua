@@ -1,6 +1,8 @@
+local api = vim.api
 vim.opt.termguicolors = true
 vim.cmd "colorscheme gruvbox"
-require 'nvim-treesitter.configs'.setup { highlight = { enable = true }, incremental_selection = { enable = true }, textobjects = { enable = true } }
+require 'nvim-treesitter.configs'.setup { highlight = { enable = true }, incremental_selection = { enable = true },
+    textobjects = { enable = true } }
 
 -- LSP Settings
 local opts = { noremap = true, silent = true }
@@ -16,7 +18,8 @@ local lspconfig = require('lspconfig')
 
 vim.g.coq_settings = { auto_start = 'shut-up' }
 
-local servers = { 'gopls', 'rust_analyzer', 'jedi_language_server', 'vimls', 'clangd', 'cmake', 'elixirls', 'graphql', 'html', 'bashls', 'dockerls', 'sumneko_lua', 'jdtls' }
+local servers = { 'gopls', 'rust_analyzer', 'jedi_language_server', 'vimls', 'clangd', 'cmake', 'elixirls', 'graphql',
+    'html', 'bashls', 'dockerls', 'sumneko_lua', 'jdtls' }
 for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup(require('coq').lsp_ensure_capabilities({}))
 end
@@ -37,3 +40,7 @@ require('telescope').setup {
 require('luatab').setup {}
 require('trouble').setup {}
 require('lualine').setup()
+
+-- gofmt save on write
+local group = api.nvim_create_augroup("On Write", { clear = true })
+api.nvim_create_autocmd("BufWritePre", { command = ":lua vim.lsp.buf.formatting()", group = group })
