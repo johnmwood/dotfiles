@@ -3,6 +3,7 @@ vim.call('plug#begin', '~/.vim/plugged')
     Plug('darrikonn/vim-gofmt', { ['do'] = ':GoUpdateBinaries' })
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-vinegar'
+    Plug 'tpope/vim-surround'
     Plug 'williamboman/nvim-lsp-installer'
     Plug 'neovim/nvim-lspconfig'
     Plug 'nvim-lua/plenary.nvim'
@@ -12,9 +13,8 @@ vim.call('plug#begin', '~/.vim/plugged')
     Plug 'folke/trouble.nvim'
     Plug('ms-jpq/coq_nvim', {branch =  'coq', ['do'] = 'python3 -m coq deps'})
     Plug('ms-jpq/coq.artifacts', {branch =  'artifacts'})
-    Plug ('ms-jpq/coq.thirdparty', {branch = '3p'})
-    Plug('tpope/vim-surround')
-    -- Plug 'ray-x/lsp_signature.nvim'
+    Plug('ms-jpq/coq.thirdparty', {branch = '3p'})
+    Plug 'ray-x/lsp_signature.nvim'
     Plug 'gruvbox-community/gruvbox'
     Plug 'nvim-lualine/lualine.nvim'
     Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })

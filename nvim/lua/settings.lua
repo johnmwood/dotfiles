@@ -3,7 +3,6 @@ local opt = vim.opt
 
 o.relativenumber = true
 o.number = true
--- opt.cc = { 90 }
 o.hlsearch = false
 o.incsearch = true 
 o.smartcase = true
