@@ -43,4 +43,4 @@ require('lualine').setup()
 
 -- gofmt save on write
 local group = api.nvim_create_augroup("On Write", { clear = true })
-api.nvim_create_autocmd("BufWritePre", { command = ":lua vim.lsp.buf.formatting()", group = group })
+api.nvim_create_autocmd("BufWritePre", { command = ":lua vim.lsp.buf.formatting_sync()", group = group })
