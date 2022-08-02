@@ -5,6 +5,7 @@ o.autoindent = 4
 o.et = false
 o.expandtab = true
 o.guitablabel = '%t'
+o.hlsearch = false
 o.ignorecase = true
 o.incsearch = true
 o.number = true
@@ -16,6 +17,8 @@ o.softtabstop = 4
 o.tabstop = 4
 o.ttyfast = true
 o.wrap = false
+
+o.updatetime = 100
 
 opt.scrolloff = 24
 opt.mouse = 'a'
