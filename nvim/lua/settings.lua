@@ -22,5 +22,9 @@ o.wrap = false
 opt.scrolloff = 24
 opt.mouse = 'a'
 
+-- gitgutter
+vim.g.gitgutter_enabled = 1
+vim.g.gitgutter_map_keys = 0
+
 cmd 'set updatetime=300'
 cmd 'set guicursor=i:ver25,i:blinkon1'
