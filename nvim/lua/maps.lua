@@ -1,4 +1,6 @@
 local keymap = vim.keymap
+local cmd = vim.cmd
+local api = vim.api
 
 -- Open netrw
 keymap.set('n', '<C-n>', '<cmd>E<cr>')
@@ -40,3 +42,7 @@ keymap.set("n", "<leader>xd", "<cmd>Trouble document_diagnostics<cr>", { silent 
 keymap.set("n", "<leader>xl", "<cmd>Trouble loclist<cr>", { silent = true, noremap = true })
 keymap.set("n", "<leader>xq", "<cmd>Trouble quickfix<cr>", { silent = true, noremap = true })
 keymap.set("n", "gR", "<cmd>Trouble lsp_references<cr>", { silent = true, noremap = true })
+
+-- gofmt save on write
+local group = api.nvim_create_augroup("On Write", { clear = true })
+api.nvim_create_autocmd("BufWritePre", { command = ":lua vim.lsp.buf.formatting_sync()", group = group })

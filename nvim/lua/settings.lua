@@ -1,5 +1,6 @@
 local o = vim.o
 local opt = vim.opt
+local cmd = vim.cmd
 
 o.autoindent = 4
 o.et = false
@@ -13,14 +14,13 @@ o.relativenumber = true
 o.shiftwidth = 4
 o.smartcase = true
 o.softtabstop = 4
--- o.swapfile = true
+o.swapfile = false
 o.tabstop = 4
 o.ttyfast = true
 o.wrap = false
 
-o.updatetime = 100
-
 opt.scrolloff = 24
 opt.mouse = 'a'
 
-vim.cmd 'set guicursor=i:ver25,i:blinkon1'
+cmd 'set updatetime=300'
+cmd 'set guicursor=i:ver25,i:blinkon1'
