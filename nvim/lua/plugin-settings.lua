@@ -26,8 +26,6 @@ require('nvim-lsp-installer').setup {}
 
 local group = api.nvim_create_augroup("LSP Group", { clear = true })
 
-something =================
-
 local on_attach = function(client, bufnr)
     require('coq').lsp_ensure_capabilities({})
     api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
