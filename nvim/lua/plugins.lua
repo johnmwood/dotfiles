@@ -19,4 +19,5 @@ Plug 'gruvbox-community/gruvbox'
 Plug 'nvim-lualine/lualine.nvim'
 Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
 Plug 'airblade/vim-gitgutter'
+Plug 'ruanyl/vim-gh-line'
 vim.call('plug#end')

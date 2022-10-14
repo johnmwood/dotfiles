@@ -11,6 +11,7 @@ cmd "colorscheme gruvbox"
 
 highlight.create('Comment', { cterm = 'italic', gui = 'italic' }, false)
 highlight.create('String', { cterm = 'italic', gui = 'italic' }, false)
+highlight.create('Function', { cterm = 'bold', gui = 'bold' }, false)
 
 require 'nvim-treesitter.configs'.setup {
     ensure_installed = { "c", "lua", "rust", "go", "java", "elixir", "cpp", "yaml" },
@@ -51,11 +52,11 @@ end
 local lspconfig = require('lspconfig')
 
 vim.diagnostic.config({ virtual_text = false })
-
+vim.g.gh_github_domain = "ghe.spotify.net"
 vim.g.coq_settings = { auto_start = 'shut-up' }
 
 local servers = { 'gopls', 'rust_analyzer', 'jedi_language_server', 'vimls', 'clangd', 'cmake', 'elixirls', 'graphql',
-    'html', 'bashls', 'dockerls', 'sumneko_lua', 'jdtls', 'yamlls' }
+    'html', 'bashls', 'dockerls', 'sumneko_lua', 'jdtls', 'yamlls', 'pyright' }
 for _, lsp in ipairs(servers) do
     if lsp == 'gopls' then do
             lspconfig.gopls.setup {
