@@ -7,7 +7,9 @@ opt.termguicolors = true
 cmd "set t_8f=^[[38;2;%lu;%lu;%lum"
 cmd "set t_8b=^[[48;2;%lu;%lu;%lum"
 
-cmd "colorscheme gruvbox"
+-- COLORSCHEMES
+-- cmd "colorscheme gruvbox"
+cmd "colorscheme OceanicNext"
 
 highlight.create('Comment', { cterm = 'italic', gui = 'italic' }, false)
 highlight.create('String', { cterm = 'italic', gui = 'italic' }, false)
@@ -112,3 +114,6 @@ require('telescope').setup {
 require('trouble').setup {
     icons = false,
 }
+
+-- leap key bindings
+require('leap').add_default_mappings()

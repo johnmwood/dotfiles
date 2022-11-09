@@ -15,9 +15,10 @@ Plug('ms-jpq/coq_nvim', { branch = 'coq', ['do'] = 'python3 -m coq deps' })
 Plug('ms-jpq/coq.artifacts', { branch = 'artifacts' })
 Plug('ms-jpq/coq.thirdparty', { branch = '3p' })
 Plug 'ray-x/lsp_signature.nvim'
-Plug 'gruvbox-community/gruvbox'
-Plug 'nvim-lualine/lualine.nvim'
+Plug 'gruvbox-community/gruvbox' -- themes
+Plug 'mhartington/oceanic-next'
 Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
 Plug 'airblade/vim-gitgutter'
 Plug 'ruanyl/vim-gh-line'
+Plug 'ggandor/leap.nvim'
 vim.call('plug#end')
