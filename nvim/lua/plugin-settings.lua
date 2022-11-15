@@ -10,6 +10,8 @@ cmd "set t_8b=^[[48;2;%lu;%lu;%lum"
 -- COLORSCHEMES
 -- cmd "colorscheme gruvbox"
 cmd "colorscheme OceanicNext"
+-- cmd "colorscheme nightfox"
+-- cmd "set background=dark"
 
 highlight.create('Comment', { cterm = 'italic', gui = 'italic' }, false)
 highlight.create('String', { cterm = 'italic', gui = 'italic' }, false)
