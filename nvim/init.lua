@@ -1,5 +1,1 @@
-vim.g.mapleader = " "
-require "settings"
-require "maps"
-require "plugins"
-require "plugin-settings"
+require("jwood")
