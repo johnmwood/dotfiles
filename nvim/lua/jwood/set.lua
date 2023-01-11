@@ -20,7 +20,7 @@ o.undofile = true
 
 o.termguicolors = true
 
-o.number = true
+o.number = false
 o.relativenumber = false
 o.smartcase = true
 o.ttyfast = true

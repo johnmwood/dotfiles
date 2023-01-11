@@ -1,9 +1,14 @@
-function ColorMyPencils(color)
-	color = color or "rose-pine"
-	vim.cmd.colorscheme(color)
+require('rose-pine').setup({ dark_variant = 'moon' })
 
-	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+function SCS(color)
+    local final = 'rose-pine'
+    if color == 'g' then
+        final = 'gruvbox'
+    elseif color == 'i' then
+        final = 'iceberg'
+    end
+
+    vim.cmd.colorscheme(final)
 end
 
-ColorMyPencils()
+SCS()
