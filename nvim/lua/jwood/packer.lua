@@ -1,7 +1,12 @@
--- this file can be loaded by calling `lua require('plugins')` from your init.vim
+-- -- ensure that packer is installed
+-- local install_path = vim.fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
+-- if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+--     vim.api.nvim_command.execute('!git clone https://github.com/wbthomason/packer.nvim '..install_path)
+--     vim.api.nvim_command.execute 'packadd packer.nvim'
+-- end
 
 -- Only required if you have packer configured as `opt`
-vim.cmd [[packadd packer.nvim]]
+vim.cmd('packadd packer.nvim')
 
 return require('packer').startup(function(use)
     -- Packer can manage itself
@@ -16,7 +21,7 @@ return require('packer').startup(function(use)
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.0',
         -- or                            , branch = '0.1.x',
-        requires = { {'nvim-lua/plenary.nvim'} }  
+        requires = { {'nvim-lua/plenary.nvim'} }
     }
 
     use('tpope/vim-fugitive') -- git 
