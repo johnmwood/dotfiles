@@ -1,0 +1,104 @@
+env:
+  TERM: xterm-256color
+
+window:
+  decorations: none
+
+  opacity: 1
+
+  # Startup Mode (changes require restart)
+  #
+  # Values for `startup_mode`:
+  #   - Windowed
+  #   - Maximized
+  #   - Fullscreen
+  #
+  # Values for `startup_mode` (macOS only):
+  #   - SimpleFullscreen
+  startup_mode: Maximized
+
+
+scrolling:
+  history: 10000
+  multiplier: 3
+
+font:
+  normal:
+    # Font family
+    #
+    # Default:
+    #   - (macOS) Menlo
+    #   - (Linux/BSD) monospace
+    #   - (Windows) Consolas
+    family: JetBrains Mono 
+  bold: 
+    family: JetBrains Mono
+    style: Bold
+  italic:
+    family: JetBrains Mono
+    style: Italic
+  size: 16
+  # offset: 
+  #   x: 1
+  #   y: 0
+colors:
+  # Default colors
+  primary:
+    background: '0x0d1117'
+    foreground: '0xb3b1ad'
+
+  # Normal colors
+  normal:
+    black:   '0x484f58'
+    red:     '0xff7b72'
+    green:   '0x3fb950'
+    yellow:  '0xd29922'
+    blue:    '0x58a6ff'
+    magenta: '0xbc8cff'
+    cyan:    '0x39c5cf'
+    white:   '0xb1bac4'
+
+  # Bright colors
+  bright:
+    black:   '0x6e7681'
+    red:     '0xffa198'
+    green:   '0x56d364'
+    yellow:  '0xe3b341'
+    blue:    '0x79c0ff'
+    magenta: '0xd2a8ff'
+    cyan:    '0x56d4dd'
+    white:   '0xf0f6fc'
+
+  indexed_colors:
+    - { index: 16, color: '0xd18616' }
+    - { index: 17, color: '0xffa198' }
+
+selection:
+  semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
+
+cursor:
+  style:
+    # Values for `shape`:
+    #   - ▇ Block
+    #   - _ Underline
+    #   - | Beam
+    shape: Block
+
+    # Cursor blinking state
+    #
+    # Values for `blinking`:
+    #   - Never: Prevent the cursor from ever blinking
+    #   - Off: Disable blinking by default
+    #   - On: Enable blinking by default
+    #   - Always: Force the cursor to always blink
+    blinking: On
+
+#
+# Default:
+#   - (macOS) /bin/bash --login
+#   - (Linux/BSD) user login shell
+#   - (Windows) powershell
+shell:
+  program: /bin/zsh
+  args:
+   - --login 
