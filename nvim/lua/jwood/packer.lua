@@ -14,7 +14,6 @@ return require('packer').startup(function(use)
 
     use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
     use('nvim-treesitter/playground')
-    use('fatih/vim-go', {run = ':GoUpdateBinaries'})
     use('theprimeagen/harpoon')
     use('mbbill/undotree')
     use("folke/zen-mode.nvim")
@@ -24,6 +23,12 @@ return require('packer').startup(function(use)
         -- or                            , branch = '0.1.x',
         requires = { {'nvim-lua/plenary.nvim'} }
     }
+
+    -- language plugins
+    use('fatih/vim-go', {run = ':GoUpdateBinaries'})
+    use('neovim/nvim-lspconfig')
+    use('jose-elias-alvarez/null-ls.nvim')
+    use('MunifTanjim/eslint.nvim')
 
     use('tpope/vim-fugitive') -- git 
     use('tpope/vim-commentary') -- comment things out
