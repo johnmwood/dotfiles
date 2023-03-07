@@ -25,6 +25,7 @@ o.relativenumber = false
 o.smartcase = true
 o.ttyfast = true
 o.wrap = false
+o.cc = 80
 
 opt.scrolloff = 12
 opt.mouse = 'a'

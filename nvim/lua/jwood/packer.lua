@@ -28,7 +28,7 @@ return require('packer').startup(function(use)
     use('fatih/vim-go', {run = ':GoUpdateBinaries'})
     use('neovim/nvim-lspconfig')
     use('jose-elias-alvarez/null-ls.nvim')
-    use('MunifTanjim/eslint.nvim')
+    -- use('MunifTanjim/eslint.nvim')
 
     use('tpope/vim-fugitive') -- git 
     use('tpope/vim-commentary') -- comment things out
