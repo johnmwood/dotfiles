@@ -14,6 +14,7 @@ lsp.ensure_installed({
   'yamlls',
   'bashls',
   'clangd',
+  'jdtls',
 })
 
 -- Fix Undefined global 'vim'
