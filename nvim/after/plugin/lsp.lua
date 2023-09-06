@@ -8,6 +8,7 @@ lsp.ensure_installed({
   'sumneko_lua',
   'rust_analyzer',
   'gopls',
+  'bufls',
   'jedi_language_server',
   'cmake',
   'dockerls',
