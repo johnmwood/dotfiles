@@ -2,6 +2,7 @@ local lsp = require("lsp-zero")
 
 lsp.preset("recommended")
 
+-- add lsp_zero plugin
 lsp.ensure_installed({
   'tsserver',
   -- 'eslint',
