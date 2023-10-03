@@ -1,4 +1,4 @@
-require('trouble').setup {
+require('trouble').setup({
     icons = false,
     signs = {
         -- icons / text used for a diagnostic
@@ -8,7 +8,7 @@ require('trouble').setup {
         information = 'I',
         other = 'O'
     },
-}
+})
 
 vim.keymap.set("n", "<leader>xx", "<cmd>Trouble workspace_diagnostics<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "<leader>xd", "<cmd>Trouble document_diagnostics<cr>", { silent = true, noremap = true })

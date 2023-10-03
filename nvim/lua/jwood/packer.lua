@@ -23,12 +23,15 @@ return require('packer').startup(function(use)
         -- or                            , branch = '0.1.x',
         requires = { {'nvim-lua/plenary.nvim'} }
     }
+    -- dap
+    use { 'rcarriga/nvim-dap-ui', requires = {'mfussenegger/nvim-dap'} }
+    use('theHamsta/nvim-dap-virtual-text')
+    use('leoluz/nvim-dap-go')
 
     -- language plugins
     use('fatih/vim-go', {run = ':GoUpdateBinaries'})
     use('neovim/nvim-lspconfig')
     use('jose-elias-alvarez/null-ls.nvim')
-    -- use('MunifTanjim/eslint.nvim')
 
     use('tpope/vim-fugitive') -- git 
     use('tpope/vim-commentary') -- comment things out

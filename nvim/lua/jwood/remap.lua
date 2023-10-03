@@ -17,3 +17,9 @@ vim.keymap.set("n", "<leader>Y", [["+Y]])
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 -- vim.keymap.set({"n", "v"}, "<leader>cp", ":let @+=expand('%:p')<CR>")
 -- vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+
+-- dap remaps
+vim.keymap.set("n", "<leader>dt", ":DapUiToggle<CR>", {noremap=true})
+vim.keymap.set("n", "<leader>db", ":DapToggleBreakpoint<CR>", {noremap=true})
+vim.keymap.set("n", "<leader>dc", ":DapContinue<CR>", {noremap=true})
+vim.keymap.set("n", "<leader>dr", ":lua require('dapui').open({reset = true})<CR>", {noremap=true})
