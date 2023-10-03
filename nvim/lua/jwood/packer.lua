@@ -45,6 +45,12 @@ return require('packer').startup(function(use)
     use('gruvbox-community/gruvbox')
     use('cocopon/iceberg.vim')
 
+    use({
+        "williamboman/mason.nvim",
+        "williamboman/mason-lspconfig.nvim",
+        "neovim/nvim-lspconfig",
+    })
+
     use {
 	    'VonHeikemen/lsp-zero.nvim',
 	    requires = {
