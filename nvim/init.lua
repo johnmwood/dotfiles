@@ -75,7 +75,6 @@ require('lazy').setup({
             })
         end
     },
-
     {
         'folke/trouble.nvim',
         opts = {
@@ -159,6 +158,11 @@ require('lazy').setup({
         end
     },
     { "lukas-reineke/lsp-format.nvim", config = true },
+
+    -- git
+    { "tpope/vim-fugitive" },
+    { "airblade/vim-gitgutter" },
+    { "ruanyl/vim-gh-line" },
 })
 
 local lsp_zero = require('lsp-zero')
@@ -207,9 +211,9 @@ cmp.setup({
         { name = "copilot" },
     },
     mapping = cmp.mapping.preset.insert({
-        -- ['<Tab>'] = cmp_action.luasnip_supertab(),
         ['<CR>'] = cmp.mapping.confirm({ select = false }),
-
+        ['<Tab>'] = cmp.mapping.select_next_item(),
+        ['<S-Tab>'] = cmp.mapping.select_prev_item(),
     })
 })
 
