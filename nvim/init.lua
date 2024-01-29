@@ -177,7 +177,7 @@ lsp_zero.preset("recommended")
 lsp_zero.on_attach(function(client, bufnr)
     require("lsp-format").on_attach(client, bufnr)
     local opts = { buffer = bufnr, remap = false }
-    vim.keymap.set('n', '<leader>K', vim.lsp.buf.hover, opts)
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
     vim.keymap.set('n', 'gs', vim.lsp.buf.signature_help, opts)
     vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts)
@@ -227,6 +227,11 @@ cmp.setup({
 vim.diagnostic.config { virtual_text = false }
 
 -- ################
+-- ###### Go ######
+-- ################
+
+
+-- ################
 -- ### Settings ###
 -- ################
 vim.opt.nu = true
@@ -262,8 +267,8 @@ vim.keymap.set("n", "<leader>xl", "<cmd>Trouble loclist<cr>", { silent = true, n
 vim.keymap.set("n", "<leader>xq", "<cmd>Trouble quickfix<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "gR", "<cmd>Trouble lsp_references<cr>", { silent = true, noremap = true })
 
-vim.keymap.set('n', '<leader>f', "<cmd>lua require('fzf-lua').files()<CR>", { silent = true })
-vim.keymap.set('n', '<leader>r', "<cmd>lua require('fzf-lua').grep_visual()<CR>", { silent = true })
+vim.keymap.set('n', '<leader>ff', "<cmd>lua require('fzf-lua').files()<CR>", { silent = true })
+vim.keymap.set('n', '<leader>rr', "<cmd>lua require('fzf-lua').grep_visual()<CR>", { silent = true })
 vim.keymap.set('n', '<leader>/', "<cmd>lua require('fzf-lua').grep()<CR>", { silent = true })
 
 -- harpoon
@@ -273,5 +278,11 @@ local ui = require("harpoon.ui")
 vim.keymap.set("n", "<leader>a", mark.add_file)
 vim.keymap.set("n", "<leader>h", ui.toggle_quick_menu)
 
+vim.keymap.set("n", "<C-h>", function() ui.nav_file(1) end)
+vim.keymap.set("n", "<C-t>", function() ui.nav_file(2) end)
+vim.keymap.set("n", "<C-n>", function() ui.nav_file(3) end)
+vim.keymap.set("n", "<C-s>", function() ui.nav_file(4) end)
+
+-- resize windows
 vim.keymap.set("n", "<leader>=", '<cmd>resize +10<cr>')
 vim.keymap.set("n", "<leader>-", '<cmd>resize -10<cr>')
