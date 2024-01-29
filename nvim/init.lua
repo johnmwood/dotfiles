@@ -120,7 +120,14 @@ require('lazy').setup({
     {
         "ibhagwan/fzf-lua",
         config = function()
-            require("fzf-lua").setup({})
+            require("fzf-lua").setup({
+                keymap = {
+                    fzf = {
+                        ['tab'] = "down",
+                        ['shift-tab'] = "up",
+                    }
+                }
+            })
         end
     },
     { 'theprimeagen/harpoon' },
