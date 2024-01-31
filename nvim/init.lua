@@ -39,8 +39,9 @@ require('lazy').setup({
                     enabled = false,
                 },
                 suggestion = {
-                    enabled = false,
+                    enabled = true,
                     auto_trigger = true,
+                    accept = false, -- disable built-in keymapping
                 },
             })
         end
@@ -170,6 +171,8 @@ require('lazy').setup({
     { "tpope/vim-fugitive" },
     { "airblade/vim-gitgutter" },
     { "ruanyl/vim-gh-line" },
+    -- go
+    { 'fatih/vim-go' }
 })
 
 local lsp_zero = require('lsp-zero')
@@ -204,7 +207,7 @@ local cmp = require('cmp')
 local cmp_action = lsp_zero.cmp_action()
 local cmp_format = require('lsp-zero').cmp_format()
 require('luasnip.loaders.from_vscode').lazy_load()
-
+local luasnip = require('luasnip')
 
 cmp.setup({
     sources = {
@@ -219,8 +222,29 @@ cmp.setup({
     },
     mapping = cmp.mapping.preset.insert({
         ['<CR>'] = cmp.mapping.confirm({ select = false }),
-        ['<Tab>'] = cmp.mapping.select_next_item(),
-        ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+        -- ['<Tab>'] = cmp.mapping.select_next_item(),
+        -- ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+        ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true })
+            elseif require("copilot.suggestion").is_visible() then
+                require("copilot.suggestion").accept()
+            elseif luasnip.expand_or_locally_jumpable() then
+                luasnip.expand_or_jump()
+            else
+                fallback()
+            end
+        end, { "i", "s" }),
+
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+                luasnip.jump(-1)
+            else
+                fallback()
+            end
+        end, { "i", "s" }),
     })
 })
 
@@ -286,3 +310,13 @@ vim.keymap.set("n", "<C-s>", function() ui.nav_file(4) end)
 -- resize windows
 vim.keymap.set("n", "<leader>=", '<cmd>resize +10<cr>')
 vim.keymap.set("n", "<leader>-", '<cmd>resize -10<cr>')
+
+-- paste buffer over current text
+vim.keymap.set("x", "<leader>p", [["_dP]])
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
+vim.keymap.set("n", "<leader>Y", [["+Y]])
+
+-- go
+vim.keymap.set("n", "<leader>gt", vim.cmd.GoTest)
+vim.keymap.set("n", "<leader>k", vim.cmd.GoFmt)
+vim.keymap.set("n", "<leader>gr", vim.cmd.GoRun)
