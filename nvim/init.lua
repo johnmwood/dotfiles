@@ -17,7 +17,8 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
     {
-        "rose-pine/neovim", as = "rose-pine",
+        "rose-pine/neovim",
+        as = "rose-pine",
         priority = 1000,
         config = function()
             require("rose-pine").setup({
@@ -80,8 +81,8 @@ require('lazy').setup({
         'folke/trouble.nvim',
         opts = {
             icons = false,
-            fold_open = "v", -- icon used for open folds
-            fold_closed = ">", -- icon used for closed folds
+            fold_open = "v",      -- icon used for open folds
+            fold_closed = ">",    -- icon used for closed folds
             indent_lines = false, -- add an indent guide below the fold icons
             signs = {
                 error = "error",
@@ -170,7 +171,11 @@ require('lazy').setup({
     -- git
     { "tpope/vim-fugitive" },
     { "airblade/vim-gitgutter" },
-    { "ruanyl/vim-gh-line" },
+    {
+        "ruanyl/vim-gh-line",
+        gh_github_domain = "github.com|bitbucket.cfdata.org",
+    },
+
     -- go
     { 'fatih/vim-go' }
 })
