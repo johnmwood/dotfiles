@@ -289,6 +289,10 @@ vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("n", "<leader>ll", "<cmd>set background=light<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "<leader>dd", "<cmd>set background=dark<cr>", { silent = true, noremap = true })
 
+-- gh_line remaps
+vim.keymap.set("n", "<leader>gh", "<cmd>GH<cr>")
+vim.keymap.set("n", "<leader>gb", "<cmd>GB<cr>")
+
 -- trouble
 vim.keymap.set("n", "<leader>xx", "<cmd>Trouble workspace_diagnostics<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "<leader>xd", "<cmd>Trouble document_diagnostics<cr>", { silent = true, noremap = true })
