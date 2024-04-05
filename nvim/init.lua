@@ -62,6 +62,7 @@ require('lazy').setup({
     { 'tpope/vim-commentary' },
     { 'tpope/vim-vinegar' },
     { 'nvim-lua/plenary.nvim' },
+    { 'romainl/vim-cool' },
     {
         'scalameta/nvim-metals',
         config = function()
@@ -173,7 +174,7 @@ require('lazy').setup({
     { "airblade/vim-gitgutter" },
     {
         "ruanyl/vim-gh-line",
-        gh_github_domain = "github.com|bitbucket.cfdata.org",
+        gh_git_remote = "https://bitbucket.cfdata.org",
     },
 
     -- go
@@ -256,11 +257,6 @@ cmp.setup({
 vim.diagnostic.config { virtual_text = false }
 
 -- ################
--- ###### Go ######
--- ################
-
-
--- ################
 -- ### Settings ###
 -- ################
 vim.opt.nu = true
@@ -289,9 +285,32 @@ vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("n", "<leader>ll", "<cmd>set background=light<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "<leader>dd", "<cmd>set background=dark<cr>", { silent = true, noremap = true })
 
--- gh_line remaps
 vim.keymap.set("n", "<leader>gh", "<cmd>GH<cr>")
 vim.keymap.set("n", "<leader>gb", "<cmd>GB<cr>")
+
+vim.cmd [[
+" Command to store link to current line in bitbucket UI in the system's
+" clipboard.
+function! GetSourceLink() range
+  let giturls={'git@stash.cfops.it:7999': 'bitbucket.cfdata.org/projects', 'git@bitbucket.cfdata.org:7999': 'bitbucket.cfdata.org/projects', 'git.kernel.org': "elixir.bootlin.com", "github.com": "github.com"}
+
+  let remote=system("git remote get-url origin")
+  let commit=system("git rev-parse HEAD")
+  let domain=split(remote, '/')[2]
+  let project=split(remote, '/')[-2]
+  let repo=split(split(remote, '/')[-1], '\.')[0]
+
+  if domain ==# "git.kernel.org"
+    let @+=join(["https:/", giturls[domain], "linux/latest/source" , @%.'#L'.line('.')], "/")
+  elseif domain ==# "github.com"
+    let @+=join(["https:/", giturls[domain], project, repo, "tree/master", commit, @%.'#L'.a:firstline.'-'.'L'.a:lastline ], "/")
+  else " bitbucket
+    let @+=join(["https:/", giturls[domain], project, "repos", repo ,"browse", @%.'?at='.commit.'#'.a:firstline.'-'.a:lastline], "/")
+  endif
+endfunction
+]]
+
+vim.keymap.set('', '<leader>bb', ':call GetSourceLink()<CR>', options)
 
 -- trouble
 vim.keymap.set("n", "<leader>xx", "<cmd>Trouble workspace_diagnostics<cr>", { silent = true, noremap = true })
