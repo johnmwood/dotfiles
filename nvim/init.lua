@@ -30,23 +30,23 @@ require('lazy').setup({
     {
         "ellisonleao/gruvbox.nvim",
     },
-    {
-        "zbirenbaum/copilot.lua",
-        cmd = "Copilot",
-        event = "InsertEnter",
-        config = function()
-            require("copilot").setup({
-                panel = {
-                    enabled = false,
-                },
-                suggestion = {
-                    enabled = true,
-                    auto_trigger = true,
-                    accept = false, -- disable built-in keymapping
-                },
-            })
-        end
-    },
+    -- {
+    --     "zbirenbaum/copilot.lua",
+    --     cmd = "Copilot",
+    --     event = "InsertEnter",
+    --     config = function()
+    --         require("copilot").setup({
+    --             panel = {
+    --                 enabled = false,
+    --             },
+    --             suggestion = {
+    --                 enabled = true,
+    --                 auto_trigger = true,
+    --                 accept = false, -- disable built-in keymapping
+    --             },
+    --         })
+    --     end
+    -- },
     {
         'nvim-lualine/lualine.nvim',
         config = function()
@@ -103,7 +103,7 @@ require('lazy').setup({
         config = function()
             require('nvim-treesitter.configs').setup({
                 ensure_installed = { 'go', 'gomod', 'lua', 'vimdoc', 'vim', 'bash', 'markdown',
-                    'markdown_inline', 'c', 'rust', 'cpp', 'yaml', 'toml', 'java',
+                    'markdown_inline', 'c', 'rust', 'cpp', 'yaml', 'toml', 'java', 'javascript', 'typescript'
                 },
                 indent = { enable = true },
                 highlight = {
@@ -134,7 +134,18 @@ require('lazy').setup({
         end
     },
     { 'theprimeagen/harpoon' },
-    { 'williamboman/mason.nvim' },
+    {
+        'williamboman/mason.nvim',
+        opts = {
+            ensure_installed = {
+                "gopls",
+                "typescript-language-server",
+                "eslint-lsp",
+                "prettierd",
+                "",
+            }
+        }
+    },
     { 'williamboman/mason-lspconfig.nvim' },
     -- LSP Support
     {
@@ -161,12 +172,12 @@ require('lazy').setup({
     { "saadparwaiz1/cmp_luasnip" },
     { "hrsh7th/cmp-nvim-lsp" },
     { "rafamadriz/friendly-snippets" },
-    {
-        "zbirenbaum/copilot-cmp",
-        config = function()
-            require("copilot_cmp").setup()
-        end
-    },
+    -- {
+    --     "zbirenbaum/copilot-cmp",
+    --     config = function()
+    --         require("copilot_cmp").setup()
+    --     end
+    -- },
     { "lukas-reineke/lsp-format.nvim", config = true },
 
     -- git
@@ -178,7 +189,18 @@ require('lazy').setup({
     },
 
     -- go
-    { 'fatih/vim-go' }
+    { 'fatih/vim-go' },
+
+    -- typescript
+    { 'jose-elias-alvarez/typescript.nvim' },
+    { 'jose-elias-alvarez/null-ls.nvim' },
+    { 'MunifTanjim/prettier.nvim' },
+    { 'akinsho/nvim-bufferline.lua' }
+})
+
+local null_ls = require("null-ls")
+null_ls.setup({
+    null_ls.builtins.formatting.prettierd,
 })
 
 local lsp_zero = require('lsp-zero')
@@ -224,33 +246,35 @@ cmp.setup({
         { name = "cmp_luasnip" },
         { name = "luasnip" },
         { name = "friendly-snippets" },
-        { name = "copilot" },
+        -- { name = "copilot" },
     },
     mapping = cmp.mapping.preset.insert({
         ['<CR>'] = cmp.mapping.confirm({ select = false }),
-        -- ['<Tab>'] = cmp.mapping.select_next_item(),
-        -- ['<S-Tab>'] = cmp.mapping.select_prev_item(),
-        ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-                cmp.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true })
-            elseif require("copilot.suggestion").is_visible() then
-                require("copilot.suggestion").accept()
-            elseif luasnip.expand_or_locally_jumpable() then
-                luasnip.expand_or_jump()
-            else
-                fallback()
-            end
-        end, { "i", "s" }),
+        ['<Tab>'] = cmp.mapping.select_next_item(),
+        ['<S-Tab>'] = cmp.mapping.select_prev_item(),
 
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-                cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-                luasnip.jump(-1)
-            else
-                fallback()
-            end
-        end, { "i", "s" }),
+        -- copilot specific config
+        -- ["<Tab>"] = cmp.mapping(function(fallback)
+        --     if cmp.visible() then
+        --         cmp.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true })
+        --     elseif require("copilot.suggestion").is_visible() then
+        --         require("copilot.suggestion").accept()
+        --     elseif luasnip.expand_or_locally_jumpable() then
+        --         luasnip.expand_or_jump()
+        --     else
+        --         fallback()
+        --     end
+        -- end, { "i", "s" }),
+
+        -- ["<S-Tab>"] = cmp.mapping(function(fallback)
+        --     if cmp.visible() then
+        --         cmp.select_prev_item()
+        --     elseif luasnip.jumpable(-1) then
+        --         luasnip.jump(-1)
+        --     else
+        --         fallback()
+        --     end
+        -- end, { "i", "s" }),
     })
 })
 
@@ -270,11 +294,14 @@ vim.opt.number = false
 vim.opt.hlsearch = true
 vim.opt.incsearch = true
 vim.opt.termguicolors = true
+vim.opt.background = "light"
 vim.g.mapleader = " "
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.updatetime = 300
 vim.opt.guicursor = "i:ver25,i:blinkon1"
+vim.opt.joinspaces = false
+vim.opt.swapfile = false
 
 -- ##############
 -- ### Remaps ###
@@ -284,6 +311,19 @@ vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 
 vim.keymap.set("n", "<leader>ll", "<cmd>set background=light<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "<leader>dd", "<cmd>set background=dark<cr>", { silent = true, noremap = true })
+
+vim.cmd [[
+" temporary hack
+function! SetShiftWidth()
+    let l:filetype = &filetype
+    if l:filetype == "javascript" || l:filetype == "typescript"
+        setlocal shiftwidth=2
+    else
+        setlocal shiftwidth=4
+    end
+endfunction
+]]
+vim.keymap.set('', '<leader>sw', ':call SetShiftWidth()<CR>')
 
 vim.keymap.set("n", "<leader>gh", "<cmd>GH<cr>")
 vim.keymap.set("n", "<leader>gb", "<cmd>GB<cr>")
@@ -310,7 +350,7 @@ function! GetSourceLink() range
 endfunction
 ]]
 
-vim.keymap.set('', '<leader>bb', ':call GetSourceLink()<CR>', options)
+vim.keymap.set('', '<leader>bb', ':call GetSourceLink()<CR>')
 
 -- trouble
 vim.keymap.set("n", "<leader>xx", "<cmd>Trouble workspace_diagnostics<cr>", { silent = true, noremap = true })
