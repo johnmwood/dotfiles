@@ -5,4 +5,6 @@ stow-alacritty:
 	@stow alacritty/ -t ~/.config/alacritty
 
 stow-tmux:
-	@stow tmux/ -t ~/.config/tmux
+	@stow tmuxconf/ -t ~/
+
+stow-all: stow stow-alacritty stow-tmux
