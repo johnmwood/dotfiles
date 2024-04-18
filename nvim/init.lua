@@ -371,6 +371,10 @@ vim.keymap.set('n', '<leader>ff', "<cmd>lua require('fzf-lua').files()<CR>", { s
 vim.keymap.set('n', '<leader>rr', "<cmd>lua require('fzf-lua').grep_visual()<CR>", { silent = true })
 vim.keymap.set('n', '<leader>/', "<cmd>lua require('fzf-lua').grep()<CR>", { silent = true })
 
+-- goto next/prev references
+vim.keymap.set('n', '<C-j>', "<cmd>cprev<cr>", { silent = true })
+vim.keymap.set('n', '<C-k>', "<cmd>cnext<cr>", { silent = true })
+
 -- harpoon
 local mark = require("harpoon.mark")
 local ui = require("harpoon.ui")
