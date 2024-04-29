@@ -133,6 +133,7 @@ require('lazy').setup({
             })
         end
     },
+    { "nvim-telescope/telescope.nvim" },
     { 'theprimeagen/harpoon' },
     {
         'williamboman/mason.nvim',
@@ -178,7 +179,7 @@ require('lazy').setup({
     --         require("copilot_cmp").setup()
     --     end
     -- },
-    { "lukas-reineke/lsp-format.nvim", config = true },
+    { "lukas-reineke/lsp-format.nvim",    config = true },
 
     -- git
     { "tpope/vim-fugitive" },
@@ -217,8 +218,8 @@ lsp_zero.on_attach(function(client, bufnr)
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
     vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
-    vim.keymap.set('n', '[n', vim.diagnostic.goto_prev, opts)
-    vim.keymap.set('n', ']n', vim.diagnostic.goto_next, opts)
+    vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+    vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 end)
 
 local lua_opts = lsp_zero.nvim_lua_ls()
@@ -367,9 +368,9 @@ vim.keymap.set("n", "<leader>xl", "<cmd>Trouble loclist<cr>", { silent = true, n
 vim.keymap.set("n", "<leader>xq", "<cmd>Trouble quickfix<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "gR", "<cmd>Trouble lsp_references<cr>", { silent = true, noremap = true })
 
-vim.keymap.set('n', '<leader>ff', "<cmd>lua require('fzf-lua').files()<CR>", { silent = true })
-vim.keymap.set('n', '<leader>rr', "<cmd>lua require('fzf-lua').grep_visual()<CR>", { silent = true })
-vim.keymap.set('n', '<leader>/', "<cmd>lua require('fzf-lua').grep()<CR>", { silent = true })
+vim.keymap.set('n', '<leader>ff', "<cmd>Telescope find_files<CR>", { silent = true })
+vim.keymap.set('n', '<leader>rr', "<cmd>Telescope live_grep<CR>", { silent = true })
+vim.keymap.set('n', '<leader>b', "<cmd>Telescope buffers<CR>", { silent = true })
 
 -- goto next/prev references
 vim.keymap.set('n', '<C-j>', "<cmd>cprev<cr>", { silent = true })
