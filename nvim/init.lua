@@ -143,7 +143,7 @@ require('lazy').setup({
                 "typescript-language-server",
                 "eslint-lsp",
                 "prettierd",
-                "",
+                "pyright",
             }
         }
     },
