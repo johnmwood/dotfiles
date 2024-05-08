@@ -16,6 +16,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
+    -- colorschemes
     {
         "rose-pine/neovim",
         as = "rose-pine",
@@ -30,23 +31,21 @@ require('lazy').setup({
     {
         "ellisonleao/gruvbox.nvim",
     },
-    -- {
-    --     "zbirenbaum/copilot.lua",
-    --     cmd = "Copilot",
-    --     event = "InsertEnter",
-    --     config = function()
-    --         require("copilot").setup({
-    --             panel = {
-    --                 enabled = false,
-    --             },
-    --             suggestion = {
-    --                 enabled = true,
-    --                 auto_trigger = true,
-    --                 accept = false, -- disable built-in keymapping
-    --             },
-    --         })
-    --     end
-    -- },
+
+    -- basics
+    {
+        'williamboman/mason.nvim',
+        opts = {
+            ensure_installed = {
+                "gopls",
+                "typescript-language-server",
+                "eslint-lsp",
+                "prettierd",
+                "pyright",
+            }
+        }
+    },
+    { 'williamboman/mason-lspconfig.nvim' },
     {
         'nvim-lualine/lualine.nvim',
         config = function()
@@ -55,6 +54,14 @@ require('lazy').setup({
                     theme = 'gruvbox',
                     icons_enabled = false,
                     icons = false,
+                },
+                sections = {
+                    lualine_c = {
+                        {
+                            'filename',
+                            path = 1,
+                        }
+                    },
                 },
             })
         end
@@ -94,6 +101,8 @@ require('lazy').setup({
             use_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
         }
     },
+
+    -- treesitter
     {
         'nvim-treesitter/nvim-treesitter',
         dependencies = {
@@ -135,19 +144,7 @@ require('lazy').setup({
     },
     { "nvim-telescope/telescope.nvim" },
     { 'theprimeagen/harpoon' },
-    {
-        'williamboman/mason.nvim',
-        opts = {
-            ensure_installed = {
-                "gopls",
-                "typescript-language-server",
-                "eslint-lsp",
-                "prettierd",
-                "pyright",
-            }
-        }
-    },
-    { 'williamboman/mason-lspconfig.nvim' },
+
     -- LSP Support
     {
         'VonHeikemen/lsp-zero.nvim',
@@ -161,6 +158,7 @@ require('lazy').setup({
             { 'hrsh7th/cmp-nvim-lsp' },
         }
     },
+
     -- Autocompletion
     {
         "L3MON4D3/LuaSnip",
@@ -179,7 +177,24 @@ require('lazy').setup({
     --         require("copilot_cmp").setup()
     --     end
     -- },
-    { "lukas-reineke/lsp-format.nvim",    config = true },
+    { "lukas-reineke/lsp-format.nvim", config = true },
+    -- {
+    --     "zbirenbaum/copilot.lua",
+    --     cmd = "Copilot",
+    --     event = "InsertEnter",
+    --     config = function()
+    --         require("copilot").setup({
+    --             panel = {
+    --                 enabled = false,
+    --             },
+    --             suggestion = {
+    --                 enabled = true,
+    --                 auto_trigger = true,
+    --                 accept = false, -- disable built-in keymapping
+    --             },
+    --         })
+    --     end
+    -- },
 
     -- git
     { "tpope/vim-fugitive" },
