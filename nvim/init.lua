@@ -31,6 +31,13 @@ require('lazy').setup({
     {
         "ellisonleao/gruvbox.nvim",
     },
+    -- {
+    --     'projekt0n/github-nvim-theme',
+    -- priority = 1000,
+    -- config = function()
+    -- vim.cmd([[colorscheme github_dark_default]])
+    -- end
+    -- },
 
     -- basics
     {
@@ -51,9 +58,10 @@ require('lazy').setup({
         config = function()
             require("lualine").setup({
                 options = {
-                    theme = 'gruvbox',
-                    icons_enabled = false,
-                    icons = false,
+                    theme = "auto",
+                    icons_enabled = true,
+                    icons = true,
+                    globalstatus = true,
                 },
                 sections = {
                     lualine_c = {
@@ -70,21 +78,6 @@ require('lazy').setup({
     { 'tpope/vim-vinegar' },
     { 'nvim-lua/plenary.nvim' },
     { 'romainl/vim-cool' },
-    {
-        'scalameta/nvim-metals',
-        config = function()
-            local nvim_metals_group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
-            vim.api.nvim_create_autocmd("FileType", {
-                pattern = { "scala", "sbt" },
-                callback = function()
-                    require("metals").initialize_or_attach({})
-                    -- vim.keymap.set('n', '<leader>f', builtin.find_files, {})
-                    -- vim.keymap.set('n', '<leader>r', builtin.live_grep, {})
-                end,
-                group = nvim_metals_group,
-            })
-        end
-    },
     {
         'folke/trouble.nvim',
         opts = {

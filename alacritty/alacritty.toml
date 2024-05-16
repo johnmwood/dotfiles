@@ -7,21 +7,21 @@ opacity = 1
 startup_mode = "Maximized"
 
 [scrolling]
-history = 10_000
+history = 20_000
 multiplier = 3
 
 [font]
 size = 18
 
   [font.normal]
-  family = "JetBrainsMono Nerd Font"
+  family = "BerkeleyMono Nerd Font"
 
   [font.bold]
-  family = "JetBrainsMono Nerd Font"
+  family = "BerkeleyMono Nerd Font"
   style = "Bold"
 
   [font.italic]
-  family = "JetBrainsMono Nerd Font"
+  family = "BerkeleyMono Nerd Font"
   style = "Italic"
 
 [colors.primary]
