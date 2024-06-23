@@ -1,25 +1,39 @@
-# If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
 
-set -o vi
+set -o vi 
+set -o noclobber
 
 plugins=(
-  git
-  tmux
-  zsh-autosuggestions
+    git
+    jq
+    zsh-autosuggestions
 )
 
-ZSH_TMUX_AUTOSTART=true
+if command -v kubecolor >/dev/null; then 
+    alias k="kubecolor"
+    alias ksudo="kubecolor --as=nobody --as-group=core-operators --as-group=system:authenticated"
+else 
+    alias k="kubectl"
+    alias ksudo="kubectl --as=nobody --as-group=core-operators --as-group=system:authenticated"
+fi
 
-alias zshconfig="mate ~/.zshrc"
-alias kubectl="k"
 alias vim="nvim"
+alias ctx="kubie ctx"
+alias ns="kubie ns"
+alias sha256sum="shasum -a 256"
+alias ls="/bin/ls -Fh --color=auto"
+alias woolshears-yaml="/usr/local/bin/woolshears-yaml"
+alias git amend="git add . ; git commit --amend --reuse-message=HEAD"
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+. ~/bashUtils/*
 
 eval "$(starship init zsh)"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+pwd | grep -q go/src/bitbucket.cfdata.org || cd ~/go/src/bitbucket.cfdata.org/k8s
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/johnwood/Downloads/google-cloud-sdk 2/path.zsh.inc' ]; then . '/Users/johnwood/Downloads/google-cloud-sdk 2/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/johnwood/Downloads/google-cloud-sdk 2/completion.zsh.inc' ]; then . '/Users/johnwood/Downloads/google-cloud-sdk 2/completion.zsh.inc'; fi
