@@ -36,5 +36,8 @@
   "tab_bar": {
     "show": false,
     "show_nav_history_buttons": false
+  },
+  "indent_guides": {
+    "enabled": false
   }
 }
