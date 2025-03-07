@@ -3,13 +3,32 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 ZSH_THEME="robbyrussell"
 
-plugins=(git) 
-
 source $ZSH/oh-my-zsh.sh
 
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
+
 set -o vi
-alias vim=nvim
+set -o noclobber
+
+plugins=(
+    git
+    jq
+    zsh-autosuggestions
+)
+
+if command -v kubecolor >/dev/null; then
+    alias k="kubecolor"
+    alias ksudo="kubecolor --as=nobody --as-group=core-operators --as-group=system:authenticated"
+else
+    alias k="kubectl"
+    alias ksudo="kubectl --as=nobody --as-group=core-operators --as-group=system:authenticated"
+fi
+
+alias vim="nvim"
+alias ctx="kubie ctx"
+alias ns="kubie ns"
+alias ls="/bin/ls -Fh --color=auto"
 alias zshconfig="nvim ~/.zshrc"
 
-export PATH="$HOME/.local/bin:$PATH"
 export EDITOR=nvim
