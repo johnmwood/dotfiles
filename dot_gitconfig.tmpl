@@ -1,10 +1,10 @@
 [user]
 {{- if eq .chezmoi.hostname "CGWXYMWY4D" }} 
-    email = johnmorgan@cloudflare.com
-    name = John Wood
+    email = {{ .email.work }}
+    name = {{ .name }}
 {{- else }}
-    email = jmw.home@gmail.com
-    name = John Wood
+    email = {{ .email.personal }}
+    name = {{ .name }}
 {{- end }}
 
 {{- if eq .chezmoi.hostname "CGWXYMWY4D" }} 
