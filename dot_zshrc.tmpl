@@ -2,12 +2,11 @@ export ZSH="$HOME/.oh-my-zsh"
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 
-ZSH_THEME="powerlevel10k/powerlevel10k"
+ZSH_THEME="robbyrussell"
 
 # Add plugins
 plugins=(
     git
-    jq
     zsh-autosuggestions
     kubie
 )
@@ -43,10 +42,18 @@ alias vim="nvim"
 alias ctx="kubie ctx"
 alias ns="kubie ns"
 alias ls="/bin/ls -Fh --color=auto"
-alias zshconfig="chezmoi edit ~/.zshrc"
+alias zshconfig="nvim /Users/johnwood/.local/share/chezmoi/dot_zshrc.tmpl"
+alias nvimconfig="nvim /Users/johnwood/.local/share/chezmoi/nvim/init.lua"
+alias cm="chezmoi"
 
 export EDITOR=nvim
 
 if [[ -f ~/.zshrc.local ]]; then
   source ~/.zshrc.local
 fi
+
+{{- if eq .chezmoi.hostname "CGWXYMWY4D" }}
+if [[ "$(ps -o comm= $PPID)" != *"chezmoi"* ]]; then
+  cd ~/go/src/go.cfdata.org/k8s
+fi
+{{- end }}
