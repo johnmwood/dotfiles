@@ -31,14 +31,6 @@ require('lazy').setup({
     {
         "ellisonleao/gruvbox.nvim",
     },
-    -- {
-    --     'projekt0n/github-nvim-theme',
-    -- priority = 1000,
-    -- config = function()
-    -- vim.cmd([[colorscheme github_dark_default]])
-    -- end
-    -- },
-
     -- basics
     {
         'williamboman/mason.nvim',
@@ -47,6 +39,7 @@ require('lazy').setup({
                 "gopls",
                 "typescript-language-server",
                 "eslint-lsp",
+                "eslint_d",
                 "prettierd",
                 "pyright",
             }
@@ -209,7 +202,26 @@ require('lazy').setup({
 
 local null_ls = require("null-ls")
 null_ls.setup({
-    null_ls.builtins.formatting.prettierd,
+    sources = {
+        null_ls.builtins.formatting.prettierd,
+        null_ls.builtins.diagnostics.eslint_d,
+        null_ls.builtins.code_actions.eslint_d,
+    },
+    on_attach = function(client, bufnr)
+        require("lsp-format").on_attach(client, bufnr)
+    end,
+})
+
+require("typescript").setup({
+    server = {
+        on_attach = function(client, bufnr)
+            require("lsp-format").on_attach(client, bufnr)
+        end,
+    }
+})
+
+require('lspconfig').eslint.setup({
+    enabled = false
 })
 
 local lsp_zero = require('lsp-zero')
@@ -298,7 +310,7 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.scrolloff = 24
-vim.opt.wrap = false
+vim.opt.wrap = true
 vim.opt.number = false
 vim.opt.hlsearch = true
 vim.opt.incsearch = true
