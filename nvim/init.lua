@@ -224,6 +224,8 @@ require('lspconfig').eslint.setup({
     enabled = false
 })
 
+vim.lsp.set_log_level("debug")
+
 local lsp_zero = require('lsp-zero')
 lsp_zero.preset("recommended")
 lsp_zero.on_attach(function(client, bufnr)

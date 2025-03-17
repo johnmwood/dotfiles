@@ -219,9 +219,25 @@ require('lazy').setup({
                 }
             })
 
+            lsp_zero.configure('gopls', {
+                settings = {
+                    gopls = {
+                        analyses = {
+                            unusedparams = true,
+                            shadow = true,
+                        },
+                        staticcheck = true,
+                        gofumpt = true,
+                        usePlaceholders = true,
+                        completeUnimported = true,
+                        experimentalPostfixCompletions = true,
+                    },
+                },
+            })
+
             -- Set up mason-lspconfig integration
             require('mason-lspconfig').setup({
-                ensure_installed = {
+                automatic_installation = {
                     "lua_ls",
                     "ts_ls",
                     "eslint",
@@ -343,6 +359,8 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.opt_local.shiftwidth = 2
     end,
 })
+
+vim.lsp.set_log_level("debug")
 
 -- ##############
 -- ### Remaps ###

@@ -1,5 +1,5 @@
 export ZSH="$HOME/.oh-my-zsh"
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+eqxport PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 
 ZSH_THEME="robbyrussell"
@@ -42,8 +42,8 @@ alias vim="nvim"
 alias ctx="kubie ctx"
 alias ns="kubie ns"
 alias ls="/bin/ls -Fh --color=auto"
-alias zshconfig="nvim /Users/johnwood/.local/share/chezmoi/dot_zshrc.tmpl"
-alias nvimconfig="nvim /Users/johnwood/.local/share/chezmoi/nvim/init.lua"
+alias zshconfig="chezmoi edit ~/.zshrc"
+alias nvimconfig="chezmoi edit ~/.config/nvim/init.lua"
 alias cm="chezmoi"
 
 export EDITOR=nvim
