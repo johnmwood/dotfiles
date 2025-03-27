@@ -107,7 +107,8 @@ require('lazy').setup({
         config = function()
             require('nvim-treesitter.configs').setup({
                 ensure_installed = { 'go', 'gomod', 'lua', 'vimdoc', 'vim', 'bash', 'markdown',
-                    'markdown_inline', 'c', 'rust', 'cpp', 'yaml', 'toml', 'java', 'javascript', 'typescript'
+                    'markdown_inline', 'c', 'rust', 'cpp', 'yaml', 'toml', 'java', 'javascript',
+                    'typescript'
                 },
                 indent = { enable = true },
                 highlight = {
@@ -237,7 +238,7 @@ require('lazy').setup({
 
             -- Set up mason-lspconfig integration
             require('mason-lspconfig').setup({
-                automatic_installation = {
+                ensure_installed = {
                     "lua_ls",
                     "ts_ls",
                     "eslint",
@@ -307,24 +308,34 @@ require('lazy').setup({
 
     -- typescript
     { 'jose-elias-alvarez/typescript.nvim' },
-    { 'jose-elias-alvarez/null-ls.nvim',   dependencies = { 'nvim-lua/plenary.nvim' } },
+    { 'nvimtools/none-ls.nvim',            dependencies = { 'nvim-lua/plenary.nvim' } },
     { 'MunifTanjim/prettier.nvim' },
-    { 'akinsho/nvim-bufferline.lua' }
+    { 'akinsho/nvim-bufferline.lua' },
 })
 
--- Configure JavaScript/TypeScript with null-ls (formerly null-ls)
 local null_ls_status, null_ls = pcall(require, "null-ls")
 if not null_ls_status then
     print("Warning: null-ls could not be loaded")
 else
     null_ls.setup({
         sources = {
-            null_ls.builtins.formatting.prettierd,
+            null_ls.builtins.formatting.prettierd.with({
+                filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "css", "scss", "less", "html", "json" },
+            }),
             null_ls.builtins.diagnostics.eslint_d,
             null_ls.builtins.code_actions.eslint_d,
         }
     })
 end
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "javascript", "typescript", "javascriptreact", "typescriptreact" },
+    callback = function()
+        vim.opt_local.tabstop = 2
+        vim.opt_local.softtabstop = 2
+        vim.opt_local.shiftwidth = 2
+    end,
+})
 
 vim.diagnostic.config { virtual_text = false }
 
@@ -338,7 +349,8 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.scrolloff = 24
 vim.opt.wrap = true
-vim.opt.number = false
+vim.opt.number = true
+vim.opt.relativenumber = true
 vim.opt.hlsearch = true
 vim.opt.incsearch = true
 vim.opt.termguicolors = true
@@ -419,7 +431,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     end,
 })
 
-vim.keymap.set('', '<leader>bb', ':call GetSourceLink()<CR>')
+vim.keymap.set('', '<leader>sc', ':call GetSourceLink()<CR>')
 
 -- trouble
 vim.keymap.set("n", "<leader>xx", "<cmd>TroubleToggle workspace_diagnostics<cr>", { silent = true, noremap = true })
